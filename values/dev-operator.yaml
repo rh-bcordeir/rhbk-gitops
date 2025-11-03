@@ -6,10 +6,10 @@ name: rhbk
 
 deployOperator: true
 operator:
-  channel: stable-v26
-  startingCSV: rhbk-operator.v24.0.5-opr.1
+  channel: stable-v26.4
+  startingCSV: rhbk-operator.v26.4.2-opr.1
   installPlanApproval: Manual
 
 # Name of namespace
 namespace: rhbk-dev
-nodeSelector: app=rhbk
+# nodeSelector: app=rhbk
