@@ -1,0 +1,58 @@
+{{- if not .Values.deployOperator }}
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: {{ required "A name must be defined" .Values.name | quote }}
+  namespace: {{ .Values.namespace | default .Values.name | quote }}
+  labels:
+    {{- include "rhbk.labels" . | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "99"
+spec:
+  instances: {{ .Values.instances | default 1 }}
+
+  {{- if .Values.image }}
+  image: {{ .Values.image | quote}}
+  {{- end }}
+
+  http:
+  {{- if .Values.http }}
+    {{- toYaml .Values.http | nindent 4 }}
+  {{- else }}
+    httpEnabled: true
+    httpPort: 8080
+  {{- end }}
+
+  hostname:
+  {{- if .Values.hostname }}
+    {{- toYaml .Values.hostname | nindent 4 }}
+  {{- else }}
+    strict: false
+    strictBackchannel: false
+  {{- end }}
+
+  {{- if .Values.ingress }}
+  ingress:
+    {{- toYaml .Values.ingress | nindent 4 }}
+  {{- end }}
+
+  {{- if .Values.truststores }}
+  truststores:
+    {{- toYaml .Values.truststores | nindent 4 }}
+  {{- end }}
+
+  {{- if .Values.resources }}
+  resources:
+    {{- toYaml .Values.resources | nindent 4 }}
+  {{- end }}
+
+  {{- if .Values.features }}
+  features:
+    {{- toYaml .Values.features | nindent 4 }}
+  {{- end }}
+
+  {{- if .Values.additionalOptions }}
+  additionalOptions:
+    {{- toYaml .Values.additionalOptions | nindent 4 }}
+  {{- end }}
+  {{- end }}

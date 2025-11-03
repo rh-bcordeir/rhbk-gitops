@@ -1,0 +1,44 @@
+##################
+### DEPLOYMENT ###
+##################
+# Required values
+name: rhbk
+# Number of instances.
+instances: 1
+# Name of namespace
+namespace: rhbk-dev
+nodeSelector: app=rhbk
+##custom image
+image: <change>/rhbk:dev
+##################
+###### HTTP ######
+##################
+http:
+  tlsSecret: tls-secret
+# use service serving certificate
+tlsSecret:
+  servingCert: true
+##################
+#### HOSTNAME ####
+##################
+hostname:
+  strict: false
+  hostname: <change>
+ingress:
+  enabled: false
+##################
+### TRUSTSTORE ###
+##################
+#truststores:
+#    secret:
+#      name: <change>
+##################
+#### RESOURCES ####
+##################
+resources:
+  requests:
+    cpu: 1000m
+    memory: 1250Mi
+  limits:
+    cpu: 3000m
+    memory: 1500Mi

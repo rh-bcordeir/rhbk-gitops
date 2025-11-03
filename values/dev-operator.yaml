@@ -1,0 +1,15 @@
+##################
+### DEPLOYMENT ###
+##################
+# Required values
+name: rhbk
+
+deployOperator: true
+operator:
+  channel: stable-v26
+  startingCSV: rhbk-operator.v24.0.5-opr.1
+  installPlanApproval: Manual
+
+# Name of namespace
+namespace: rhbk-dev
+nodeSelector: app=rhbk

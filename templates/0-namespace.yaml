@@ -1,0 +1,16 @@
+{{- if .Values.deployOperator }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.namespace | default .Values.name | quote }}
+  labels:
+    argocd.argoproj.io/managed-by: openshift-gitops
+    {{- include "rhbk.labels" . | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+    openshift.io/description: "Red Hat Build of Keycloak Project"
+    openshift.io/display-name: "Red Hat Build of Keycloak"
+    {{- if and .Values.nodeSelector}}
+    openshift.io/node-selector: {{ .Values.nodeSelector | quote }}
+    {{- end}}
+{{- end}}

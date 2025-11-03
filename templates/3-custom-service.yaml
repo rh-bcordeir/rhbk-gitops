@@ -1,0 +1,30 @@
+{{- if not .Values.deployOperator }}
+{{- if and .Values.tlsSecret .Values.tlsSecret.servingCert }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-custom-service
+  namespace: {{ .Values.namespace | default .Values.name | quote }}
+  labels:
+    {{- include "rhbk.labels" . | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+    service.beta.openshift.io/serving-cert-secret-name: {{ .Values.http.tlsSecret }}
+spec:
+  ports:
+    {{- if and .Values.http .Values.http.httpEnabled}}
+    - name: http
+      protocol: TCP
+      port: {{ .Values.http.httpPort | default 8080 }}
+      targetPort: {{ .Values.http.httpPort | default 8080 }}
+    {{- end}}
+    - name: https
+      protocol: TCP
+      port: {{ .Values.http.httpsPort | default 8443 }}
+      targetPort: {{ .Values.http.httpsPort | default 8443 }}
+  selector:
+    app: keycloak
+    app.kubernetes.io/instance: {{ .Values.name }}
+    app.kubernetes.io/managed-by: keycloak-operator
+{{- end }}
+{{- end }}
