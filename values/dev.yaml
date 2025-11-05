@@ -23,7 +23,7 @@ tlsSecret:
 ##################
 hostname:
   strict: false
-  hostname: <change>
+  hostname: rhbk-dev.apps.cluster-hd67g.hd67g.sandbox1664.opentlc.com
 ingress:
   enabled: false
 ##################
