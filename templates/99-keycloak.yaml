@@ -15,6 +15,11 @@ spec:
   image: {{ .Values.image | quote}}
   {{- end }}
 
+  {{- if .Values.db }}
+  db:
+    {{- toYaml .Values.db | nindent 4 }}
+  {{- end }}
+
   http:
   {{- if .Values.http }}
     {{- toYaml .Values.http | nindent 4 }}
