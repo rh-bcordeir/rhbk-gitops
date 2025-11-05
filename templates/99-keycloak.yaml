@@ -2,8 +2,8 @@
 apiVersion: k8s.keycloak.org/v2alpha1
 kind: Keycloak
 metadata:
-  name: {{ required "A name must be defined" .Values.name | quote }}
-  namespace: {{ .Values.namespace | default .Values.name | quote }}
+  name: rhbk
+  namespace: rhbk-dev
   labels:
     {{- include "rhbk.labels" . | nindent 4 }}
   annotations:
