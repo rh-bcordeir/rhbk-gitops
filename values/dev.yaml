@@ -9,7 +9,7 @@ instances: 1
 namespace: rhbk-dev
 nodeSelector: app=rhbk
 ##custom image
-image: quay.io/rh-ee-bcordeir/rhbk:dev-ffee227ff99e7132b83f50b94c070d33db0bb688
+image: quay.io/rh-ee-bcordeir/rhbk:dev-91463cd49f2592e6d159aed19848fe1c01f4d33c
 ##################
 ###### HTTP ######
 ##################
